@@ -5,6 +5,7 @@ $.widget( "tagging_app.taggingApp", {
     },
 
     initTipElem: function(){
+        var thisWidget = this;
         if($("#tagTip")){
             this.options.tipElem = $('<div id="tagTip" style="display:none">'+
                     '<input id="tagInput" objectId="" contentType="" value="" /><button>Submit</button>'+
@@ -17,6 +18,7 @@ $.widget( "tagging_app.taggingApp", {
                 var inputElem = $("input", divElem);
                 $("#tagTip").taggingAjax("setTagForItem", inputElem.val(), inputElem.attr("objectId"),
                                             inputElem.attr("contentType"));
+                thisWidget.element.qtip("hide");
             });
 
         }
