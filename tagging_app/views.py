@@ -15,7 +15,7 @@ class TaggingFormView(TemplateView):
 
         if self.request.POST:
             form = TaggingForm(self.request.POST)
-            if form.is_valid:
+            if form.is_valid():
                 m = form.cleaned_data["content_type"].model_class()
                 obj = m.objects.get(pk=form.cleaned_data["object_id"])
                 obj.tags = form.cleaned_data["tags"]

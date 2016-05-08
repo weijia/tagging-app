@@ -1,32 +1,69 @@
 $.widget( "tagging_app.taggingApp", {
     options: {
-        apiUrl: "tagging_app/"
+        apiUrl: "tagging_app/",
+        tipElem: null
+    },
+
+    initTipElem: function(){
+        if($("#tagTip")){
+            this.options.tipElem = $('<div id="tagTip" style="display:none">'+
+                    '<input id="tagInput" objectId="" contentType="" value="" /><button>Submit</button>'+
+                    '</div>');
+            this.options.tipElem.taggingAjax();
+
+            $("button", this.options.tipElem).click(function(e){
+    //            console.log(e.target);
+                var divElem = $(e.target).parent();
+                var inputElem = $("input", divElem);
+                $("#tagTip").taggingAjax("setTagForItem", inputElem.val(), inputElem.attr("objectId"),
+                                            inputElem.attr("contentType"));
+            });
+
+        }
     },
 
     _create: function() {
+        this.initTipElem();
+        this.addHoverMenu(this.element);
+        this.addClickMenu(this.element);
     },
 
-    getCreationUrl: function(){
-        return this.options.apiUrl+"tagged_item_creation";
-    },
-
-    getTagCreationUrl: function(){
-        return this.options.apiUrl+"tag_creation";
-    },
-
-    createTag: function(tagName, callback){
-        $.post(this.getTagCreationUrl(), {name: tagName}, function(result){
-            if(callback)callback(result);});
-    },
-
-    createTagForItem: function(tagName, objectId, contentType, callback){
+    addHoverMenu: function(element){
+        var localElement = element;
         var thisWidget = this;
-        this.createTag(tagName, function(result){
-            $.post(thisWidget.getCreationUrl(), {tag: result.id, content_type: contentType, object_id: objectId},
-                function(result){
-                    if(callback)callback(result);
+        element.qtip({
+            content: {
+                text: function(event, api) {
+//                    return 'Loading...'; // Set some initial text
+//                    return localElement.attr("tags");
+                      var htmlTip = $("#tagInput", thisWidget.options.tipElem);
+                      htmlTip.attr("objectId", localElement.attr("objectId"));
+                      htmlTip.attr("contentType", localElement.attr("contentType"));
+                      htmlTip.attr("value", localElement.attr("tags"));
+////                      var htmlTip = $('<input class="tag-input" objectId="'+localElement.attr("objectId")+
+////                                '" contentType="' + localElement.attr("contentType") + '" '+
+////                                'value="'+localElement.attr("tags")+'"/>');
+////                       $("body").append(htmlTip);
+//                       htmlTip.tagsInput();
+////                       htmlTip.tagator();
+                       return thisWidget.options.tipElem;
                 }
-            );
-        });
+            },
+            position: {
+                target: 'mouse', // Use the mouse position as the position origin
+                adjust: {
+                    // Don't adjust continuously the mouse, just use initial position
+                    mouse: false
+                }
+            },
+            hide: 'unfocus',
+            style: 'qtip-wiki'
+         });
+        return;
+    },
+
+    addClickMenu: function(element){
+
     }
+
 });

@@ -31,5 +31,5 @@ urlpatterns = patterns('',
                        url(r'^tagged_item_with_user/$', ApiClassGenerator(
                            serializer_parent=[ModelSerializerWithUser]).get_api_class(TagInfo).as_view()),
                        # url(r'^tagged_item_with_user/$', TagInfoApi.as_view()),
-                       url(r'^create_tags/$', csrf_exempt(TaggingFormView.as_view()))
+                       url(r'^set_tags/$', csrf_exempt(TaggingFormView.as_view()))
                        )
