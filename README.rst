@@ -22,9 +22,27 @@ Install tagging-app::
 
     pip install tagging-app
 
-Then use it in a project::
+Then use it in a project:
 
-    import tagging_app
+In HTML template file, add js files::
+
+
+    {% block js %}
+        {{ block.super }}
+        {% include "tagging_app/tagging_head_inc.html" %}
+        <script>
+        $(".tagged-item").taggingApp();
+        </script>
+    {% endblock %}
+
+In HTML template file, add js files::
+
+
+    {% load gen_tag_attr %}
+
+    <a class="tagged-item"
+       {{ node|gen_tag_attr }}>
+    </a>
 
 Features
 --------
