@@ -20,29 +20,35 @@ Quickstart
 
 Install tagging-app::
 
-    pip install tagging-app
+    # The following are not available yet
+    # pip install tagging-app
+
+    clone to local to use this app
 
 Then use it in a project:
 
 In HTML template file, add js files::
 
-
     {% block js %}
         {{ block.super }}
         {% include "tagging_app/tagging_head_inc.html" %}
-        <script>
-        $(".tagged-item").taggingApp();
-        </script>
     {% endblock %}
 
 In HTML template file, add js files::
 
-
     {% load gen_tag_attr %}
 
     <a class="tagged-item"
-       {{ node|gen_tag_attr }}>
+       {{ node|gen_tag_attr }}>Tags
     </a>
+
+
+The above codes will generate the following element::
+
+    <a class="tagged-item"
+        objectId="1" tags="tag1, tag2" contentType="20">Tags
+    </a>
+
 
 Features
 --------
