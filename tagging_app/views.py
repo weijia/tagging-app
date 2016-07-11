@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 
+from tagging.models import Tag
 from tagging_app.forms import TaggingForm
 
 
@@ -19,7 +20,8 @@ class TaggingFormView(TemplateView):
                 m = form.cleaned_data["content_type"].model_class()
                 obj = m.objects.get(pk=form.cleaned_data["object_id"])
                 obj.tags = form.cleaned_data["tags"]
-                obj.save()
+                # Tag.objects.update_tags(obj, form.cleaned_data["tags"])
+                # obj.save()
                 context["form"] = form
             else:
                 context["form"] = form
