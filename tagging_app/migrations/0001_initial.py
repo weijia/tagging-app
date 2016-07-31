@@ -8,8 +8,8 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('tagging', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('tagging', '__first__'),
     ]
 
     operations = [
