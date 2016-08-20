@@ -6,6 +6,9 @@ $.widget( "tagging_app.taggingApp", {
 
     initTipElem: function(){
         var thisWidget = this;
+        if($("li", this.element).length==0){
+            this.element.append("<li>Input tags</li>");
+        }
         if($("#tagTip")){
             this.options.tipElem = $('<div id="tagTip" style="display:none">'+
                     '<input id="tagInput" objectId="" contentType="" value="" /><button>Submit</button>'+
