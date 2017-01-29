@@ -36,10 +36,17 @@ $.widget( "tagging_app.taggingAjax", {
 
 
     setTagForItem: function(tagName, objectId, contentType, callback){
+        //tagName could be:
+        //"": remove tags
+        //"xx,yy": tag with "xx" and "yy"
         $.post(this.getSetTagUlr(), {tags: tagName, content_type: contentType, object_id: objectId},
             function(result){
                 if(callback)callback(result);
             }
         );
+    },
+
+    setTag: function(tagName, objectId, callback){
+        this.setTagForItem(tagName, objectId, $(this.element).attr("content_type"), callback)
     }
 });

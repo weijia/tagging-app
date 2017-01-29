@@ -5,7 +5,7 @@ from tagging.models import TaggedItem
 
 
 class TaggingForm(forms.ModelForm):
-    tags = forms.CharField(max_length=512, required=True)
+    tags = forms.CharField(max_length=512, required=False)
     object_id = forms.IntegerField()
 
     class Meta:
