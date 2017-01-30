@@ -50,8 +50,26 @@ The above codes will generate the following element::
     </a>
 
 
-Features
+Features - Tagging multiple items
 --------
+
+Add tagging function to multiple items:
+
+Init::
+
+    <div class="tree-list'>
+    </div>
+    <script>
+        $('.tree-list').taggingAjax();
+    </script>
+
+Apply tags::
+
+    <script>
+        $('.tree-list').taggingAjax("setTag", event.target.value,
+            $($(event.target).parents("[pk]")[0]).attr("pk"));
+    </script>
+
 
 * TODO
 
