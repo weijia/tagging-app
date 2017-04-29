@@ -1,7 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.generics import ListCreateAPIView
-from rest_framework.serializers import ModelSerializer
 
 from djangoautoconf.django_rest_framework_utils.serializer_generator import get_create_api_class, ApiClassGenerator, \
     ModelSerializerWithUser
